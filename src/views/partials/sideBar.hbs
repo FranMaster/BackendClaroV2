@@ -1,0 +1,72 @@
+<section class="full-box cover dashboard-sideBar">
+		<div class="full-box dashboard-sideBar-bg btn-menu-dashboard"></div>
+		<div class="full-box dashboard-sideBar-ct">
+			<!--SideBar Title -->
+			<div class="full-box text-uppercase text-center text-titles dashboard-sideBar-title">
+				Modulo Griselda <i class="zmdi zmdi-close btn-menu-dashboard visible-xs"></i>
+			</div>
+			<!-- SideBar User info -->
+			<div class="full-box dashboard-sideBar-UserInfo">
+				<figure class="full-box">
+					<img src="./assets/img/avatar.png" alt="UserIcon">
+					<figcaption class="text-center text-titles">{{SideBarUser}}</figcaption>
+				</figure>
+				<ul class="full-box list-unstyled text-center">
+					<li>
+						<a href="#!">
+							<i class="zmdi zmdi-settings"></i>
+						</a>
+					</li>
+					<li>
+						<a href="#!" class="btn-exit-system">
+							<i class="zmdi zmdi-power"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!-- SideBar Menu -->
+			
+			<ul class="list-unstyled full-box dashboard-sideBar-Menu">
+				<li>
+					<a href="/home?token={{token}}">
+						<i class="zmdi zmdi-view-dashboard zmdi-hc-fw"></i> Dashboard
+					</a>
+				</li>
+			
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-account-add zmdi-hc-fw"></i> Users <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="/admin?token={{token}}" ><i class="zmdi zmdi-account zmdi-hc-fw"></i> Administradores</a>
+						</li>
+						<li>
+							<a href="/caminantes?token={{token}}"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i> Caminantes</a>
+						</li>
+						<li>
+							<a href="/pcr?token={{token}}"><i class="zmdi zmdi-face zmdi-hc-fw"></i> Pcr</a>
+						</li>
+						<li>
+							<a  href="representative.html"><i class="zmdi zmdi-male-female zmdi-hc-fw"></i> Representative</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#!" class="btn-sideBar-SubMenu">
+						<i class="zmdi zmdi-card zmdi-hc-fw"></i> Payments <i class="zmdi zmdi-caret-down pull-right"></i>
+					</a>
+					<ul class="list-unstyled full-box">
+						<li>
+							<a href="registration.html"><i class="zmdi zmdi-money-box zmdi-hc-fw"></i> Registration</a>
+						</li>
+						<li>
+							<a href="payments.html"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Payments</a>
+						</li>
+					</ul>
+				</li>
+			
+			</ul>
+			<input type="hidden" id="WebToken" value="{{token}}"/>			
+		</div>
+	</section>
