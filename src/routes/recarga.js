@@ -57,7 +57,7 @@ recargaRoute.get('/list', verificarToken,(req, res) => {
         })
 })
 
-recargaRoute.get('/listRecargas', verificarToken,(req, res) => {
+recargaRoute.post('/listRecargas', verificarToken,(req, res) => {
     let desde = req.query.desde || 0
     desde = Number(desde)
     let limite = req.query.limite || 5;
