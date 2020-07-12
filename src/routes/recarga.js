@@ -7,14 +7,14 @@ let recargaRoute = express.Router()
 //Agrega
 recargaRoute.post('/add', verificarToken,(req, res) => {
     let body = req.body
-    let recarga = new recarga({
+    let recargas = new recarga({
         fechaRecarga: body.fechaRecarga,
         pcr: body.pcr,
         mensaje:body.mensaje,       
-        email:body.email ,
+        email:body.email 
           
     })
-    recarga.save((err, recargaDB) => {
+    recargas.save((err, recargaDB) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -28,13 +28,13 @@ recargaRoute.post('/add', verificarToken,(req, res) => {
 
     })
 })
-//lista
+//listaTODOS
 recargaRoute.get('/list', verificarToken,(req, res) => {
     let desde = req.query.desde || 0
     desde = Number(desde)
     let limite = req.query.limite || 5;
     limite = Number(limite)
-    estado.find({})
+    recarga.find({})
         .skip(desde)
         .limit(limite)
         .exec((err, recargadb) => {
@@ -44,7 +44,36 @@ recargaRoute.get('/list', verificarToken,(req, res) => {
                     err
                 })
             }
-            recargadb.count({}, (err, conteo) => {
+            recarga.count({}, (err, conteo) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    })
+                }
+                res.json({ conteo, ok: true, recarga: recargadb })
+
+            })
+        })
+})
+
+recargaRoute.get('/listRecargas', verificarToken,(req, res) => {
+    let desde = req.query.desde || 0
+    desde = Number(desde)
+    let limite = req.query.limite || 5;
+    limite = Number(limite)
+    let body =req.body
+    recarga.find({email:body.email})
+        .skip(desde)
+        .limit(limite)
+        .exec((err, recargadb) => {
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                })
+            }
+            recarga.count({email:body.email}, (err, conteo) => {
                 if (err) {
                     return res.status(400).json({
                         ok: false,
