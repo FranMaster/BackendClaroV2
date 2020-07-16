@@ -16,6 +16,8 @@ recargaRoute.post('/add', verificarToken,(req, res) => {
     })
     recargas.save((err, recargaDB) => {
         if (err) {
+            console.log(err)
+            console.log(recargas)
             return res.status(400).json({
                 ok: false,
                 err
@@ -60,7 +62,36 @@ recargaRoute.get('/list', verificarToken,(req, res) => {
 recargaRoute.post('/listRecargas', verificarToken,(req, res) => {
     let desde = req.query.desde || 0
     desde = Number(desde)
-    let limite = req.query.limite || 5;
+    let limite = req.query.limite || 1000;
+    limite = Number(limite)
+    let body =req.body
+    recarga.find({email:body.email,fechaRecargaString:body.fechaRecargaString})
+        .skip(desde)
+        .limit(limite)
+        .exec((err, recargadb) => {
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                })
+            }
+            recarga.count({email:body.email}, (err, conteo) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    })
+                }
+                res.json({ conteo, ok: true, recarga: recargadb })
+
+            })
+        })
+})
+
+recargaRoute.post('/listRecargasRecientes', verificarToken,(req, res) => {
+    let desde = req.query.desde || 0
+    desde = Number(desde)
+    let limite =  10;
     limite = Number(limite)
     let body =req.body
     recarga.find({email:body.email})
